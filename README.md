@@ -7,15 +7,23 @@ Applescript for changing the Mac OS X desktop picture based on the time of day
 - http://pipwerks.com
 - MIT license http://pipwerks.mit-license.org/
 
-##What it does
-This is an AppleScript that changes your Mac's desktop picture based on the time of day.  The day is split into six 'periods':
+##How to install
 
-- Morning Early (12:01am - 8:00am)
-- Morning Late (8:01am - 12:00pm)
-- Afternoon Early (12:01pm - 3:00pm)
-- Afternoon Late (3:01pm - 6:00pm)
-- Evening Early (6:01pm - 9:00pm)
-- Evening Late (9:01pm - 12:00am)
+Use `sh install.sh`
+or
+`chmod a+x install.sh` & `./install.sh`
+
+Script for installation, works only for OSX.
+##What it does
+This is an AppleScript that changes your Mac's desktop picture based on the time of day. The day is split into six 'periods':
+
+- Morning Early (00:01 - 7:00)
+- Morning Normal (7:01 - 10:00)
+- Morning Late (10:01 - 13:00)
+- Afternoon Early (13:01 - 15:00)
+- Afternoon Late (15:01 - 18:00)
+- Evening Early (18:01 - 21:00)
+- Evening Late (21:01 - 00:00)
 
 Each period has a corresponding folder, which is meant to store images that evoke the period in question. For example, you could have a picture of a sunset in the "Evening Early" folder, or a picture of the moon in the "Evening Late" folder.
 
@@ -30,6 +38,7 @@ Each period has a corresponding folder, which is meant to store images that evok
 If you choose to use the default settings, all you need to do is create folders in your `Pictures` folder that correspond to the following sample paths:
 
 - `~/Pictures/Wallpapers/Time of Day/Morning Early/`
+- `~/Pictures/Wallpapers/Time of Day/Morning Normal/`
 - `~/Pictures/Wallpapers/Time of Day/Morning Late/`
 - `~/Pictures/Wallpapers/Time of Day/Afternoon Early/`
 - `~/Pictures/Wallpapers/Time of Day/Afternoon Late/`
@@ -37,22 +46,8 @@ If you choose to use the default settings, all you need to do is create folders 
 - `~/Pictures/Wallpapers/Time of Day/Evening Late/`
 
 ###Images
-You must supply your own images. Personally, I downloaded images from NationalGeographic.com, which provides high quality free wallpaper images. http://ngm.nationalgeographic.com/wallpaper/download
- 
-###Script file
-This script file itself can be located anywhere. I keep mine in the `/Pictures/Wallpapers/Time of Day/` folder.
-
-The script must be run at specified intervals using automation of some kind. I use GeekTool, but you may also use a built-in service such as crontab. 
-
-http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/crontab.1.html
-
-I instruct GeekTool to execute the script every 15 minutes (1800 seconds). Use this line in GeekTool's command field:
-
-    osascript ~/Pictures/Wallpapers/Time\ of\ Day/wallpaper.scpt
-
-
-##Customization
-This script can be freely customized. It is heavily commented to make it easy to understand. For example, you can easily change the specified times of day or folder names by editing the script. You can simplify to something such as "day" and "night", or get even more granular and specify a custom folder for each hour of the day.
+It's recommended that you have one image per specific directory so your background image does not randomly changes every 3 minutes (if you don't want to)
+Recommended images sites: [DevianArt](http://deviantart.com), [Pixiv](http://www.pixiv.net), Others.
 
 ###Multiple monitors
 The script includes support for multiple monitors. By default, it will display the same image on all monitors. If you prefer to set a unique image on each monitor, set the `useSamePictureAcrossDisplays` variable to `false`. 
