@@ -31,6 +31,7 @@ cp "./wallpaper.scpt" "$TARGET"
 # Install bash script for changing wallpaper
 if [ -d $LOCAL ]; then
 	cp "./config/$SCRIPT" "$LOCAL/$SCRIPT";
+	chmod a+x "$LOCAL/$SCRIPT";
 else
 	echo "Error $LOCAL not found ending installation";
 	exit 1;
