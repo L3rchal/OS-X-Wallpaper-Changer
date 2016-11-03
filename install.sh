@@ -47,7 +47,7 @@ while true; do
 		sudo cp "./config/$PLIST" "/Library/LaunchDaemons/";
 		sleep 1;
 		# Load plist
-		launchctl load -w /Library/LaunchDaemons/$PLIST;
+		sudo launchctl load -w /Library/LaunchDaemons/$PLIST;
 	fi
 done
 
