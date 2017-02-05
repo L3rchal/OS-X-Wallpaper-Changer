@@ -13,9 +13,11 @@
 # Global variables
 LOCAL=/usr/local/bin
 TARGET=$HOME/Pictures/Wallpapers
+FISHL="/usr/local/bin/fish"
 DIR="Time of Day"
-SCRIPT="wallpaperchanger.sh"
-PLIST="com.wallpaperchanger.plist"
+SCRIPT="./install/shell/wallpaperchanger.sh"
+FISHS="./install/fish/changewall.fish"
+PLIST="intall/com.wallpaperchanger.plist"
 
 # Change directory to local Wallpapers if exist
 if [ ! -d $TARGET ]; then
@@ -24,16 +26,31 @@ if [ ! -d $TARGET ]; then
 fi
 
 # Copying files to local dir
-echo "Creating local files"
-cp  -R "./$DIR" "$TARGET"
-cp "./wallpaper.scpt" "$TARGET"
-
-# Install bash script for changing wallpaper
-if [ -d $LOCAL ]; then
-	cp "./config/$SCRIPT" "$LOCAL/$SCRIPT";
-	chmod a+x "$LOCAL/$SCRIPT";
+if [ ! -f "$TARGET/wallpaper.scpt" ]; then
+	echo "Installing script file";
+	cp  -R "./$DIR" "$TARGET";
+	cp "./wallpaper.scpt" "$TARGET";
 else
-	echo "Error $LOCAL not found ending installation";
+	echo "Script file is already installed";
+fi
+
+# Check for fish
+if [ -f $FISHL ] && [ -f $LOCAL ]; then
+	echo "You have fish installed, installing fish script"
+	cp -R "$FISHS" "$LOCAL"
+	chmod a+x "$LOCAL/$FISHS";
+elif [ ! -f "$LOCAL/$SCRIPT" ]; then
+# Install bash script for changing wallpaper
+	echo "Intalling shell script"
+		if [ -d $LOCAL ]; then
+			cp "./config/$SCRIPT" "$LOCAL/$SCRIPT";
+			chmod a+x "$LOCAL/$SCRIPT";
+		else
+			echo "Error $LOCAL not found ending installation";
+			exit 1;
+		fi
+else
+	echo "Error during installing script"
 	exit 1;
 fi
 
